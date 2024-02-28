@@ -118,9 +118,10 @@ class MindtPySolver(object):
         # get the algorithm and then our job is done.
         config.set_value(kwds, skip_implicit=True)
 
-        return SolverFactory(_supported_algorithms[config.strategy][0]).solve(
-            model, **kwds
-        )
+        self.solver = SolverFactory(_supported_algorithms[config.strategy][0])
+        self.solver.solve(model, **kwds)
+
+        return self.solver
 
     #
     # Support 'with' statements.
